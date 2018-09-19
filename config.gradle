@@ -1,0 +1,19 @@
+//加载资源
+Properties properties = new Properties()
+InputStream inputStream = project.rootProject.file('local.properties').newDataInputStream()
+properties.load(inputStream)
+
+//读取字段
+def debug = properties.getProperty('debug')
+ext {
+    android = [
+            compileSdkVersion: 27,
+            minSdkVersion    : 14,
+            targetSdkVersion : 27,
+            versionName      : "1.0",
+    ]
+
+    publicDependencies = [
+            supportV4                     : "com.android.support:support-v4:27.1.1"
+    ]
+}

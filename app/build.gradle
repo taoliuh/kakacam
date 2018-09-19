@@ -1,0 +1,59 @@
+apply plugin: 'com.android.application'
+project.ext {
+    flavorName = rootProject.ext.android.flavorName
+}
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    defaultConfig {
+        applicationId "me.sonaive.kaka"
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode 1
+        versionName rootProject.ext.android.versionName
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation (rootProject.ext.publicDependencies.supportV4)
+            { exclude module: 'support-media-compat' }
+}
+
+//def static gitRevision() {
+//    def cmd = "git rev-list --branches " + gitCurrentBranchName() + " --count"
+//    def code = cmd.execute().text.trim().toInteger()
+//    if (code == 0 || code == null) {
+//        return 99999
+//    }
+//    return code
+//}
+//
+//
+//def static gitCurrentBranchName() { //获取当前分支名称
+//    def cmd = 'git symbolic-ref --short -q HEAD'
+//    def branchName = cmd.execute().text.trim()
+//
+//    return branchName
+//}
+//
+//def static gitCurrentBranchLastCommitId() { //获取当前分支上最近一次提交 id
+//    def cmd = 'git rev-parse HEAD'
+//    def commitIds = cmd.execute().text
+//    if (commitIds == null || commitIds == "") {
+//        return "unknow-commitId"
+//    }
+//    def commitId = cmd.execute().text.trim().substring(0, 7)
+//
+//    return commitId
+//}
+//
+//task getVersionCode {
+//    println("vcode = " + gitRevision() + "; branchName = " + gitCurrentBranchName() + "; lastCommitId = " + gitCurrentBranchLastCommitId())
+//}
